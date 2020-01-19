@@ -1,6 +1,5 @@
 package org.vaadin.jonni.jamote;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,6 +9,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.vaadin.jonni.jamote.model.ActualVolume;
+import org.vaadin.jonni.jamote.model.PlayInfo;
 import org.vaadin.jonni.jamote.model.Status;
 
 @Service
@@ -17,74 +17,73 @@ public class StatusPollerService {
 	private final RestTemplate restTemplate;
 	private final LatestStatusKeeper latestStatusKeeper;
 	private final Timer poller;
-	private Timer screenOffScheduler;
-	private Runtime rt;
+	private NowPlayingKeeper npKeeper;
 
-	public StatusPollerService(@Autowired RestTemplate restTemplate, @Autowired LatestStatusKeeper latestStatusKeeper) {
+	public StatusPollerService(@Autowired RestTemplate restTemplate, @Autowired LatestStatusKeeper latestStatusKeeper,
+			@Autowired NowPlayingKeeper npKeeper) {
 		this.restTemplate = restTemplate;
 		this.latestStatusKeeper = latestStatusKeeper;
+		this.npKeeper = npKeeper;
 
-		rt = Runtime.getRuntime();
 		poller = new Timer();
-		screenOffScheduler = new Timer();
+
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	public void doSomethingAfterStartup() {
-		System.out.println("hello world, I have just started up");
-		startPolling();
-	}
-
 	public void startPolling() {
+		System.out.println("start polling STATUS");
 		poller.scheduleAtFixedRate(new TimerTask() {
 
 			@Override
 			public void run() {
-				Status status = restTemplate.getForObject("http://10.0.0.41/YamahaExtendedControl/v1/main/getStatus",
-						Status.class);
-				ActualVolume volume = status.getActualVolume();
-
-				Status latestStatus = latestStatusKeeper.getLatestStatus();
-				if (latestStatus == null
-						|| latestStatus.getActualVolume().getValue().compareTo(volume.getValue()) != 0) {
-					latestStatusKeeper.setLatestStatus(status);
-					wakeupDisplay();
-				}
+				pollStatus();
 			}
 		}, 1, 200);
 	}
 
-	protected void wakeupDisplay() {
-		try {
-			System.out.println("Display wakeup");
-			Process pr = rt.exec("/usr/sbin/mcetool -Don");
-			int retVal = pr.waitFor();
+	private void pollStatus() {
+		Status status = restTemplate.getForObject("http://10.0.0.41/YamahaExtendedControl/v1/main/getStatus",
+				Status.class);
+		ActualVolume volume = status.getActualVolume();
 
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			scheduleScreenOff();
+		Status latestStatus = latestStatusKeeper.getLatestStatus();
+		if (latestStatus == null ||
+				
+				latestStatus.getActualVolume().getValue().compareTo(volume.getValue()) != 0
+				
+				||
+				
+				!latestStatus.getInput().equals(status.getInput())
+				) {
+			latestStatusKeeper.setLatestStatus(status);
+			DisplayUtils.wakeupDisplay();
+		}
+		if (latestStatus!= null && latestStatus.getInput().equals("spotify")) {
+			updateNowPlaying();
 		}
 	}
 
-	private void scheduleScreenOff() {
-		screenOffScheduler.cancel();
-		screenOffScheduler = new Timer();
-		screenOffScheduler.schedule(new TimerTask() {
+	private void updateNowPlaying() {
+		PlayInfo np = restTemplate.getForObject("http://10.0.0.41/YamahaExtendedControl/v1/netusb/getPlayInfo",
+				PlayInfo.class);
+		PlayInfo latest = npKeeper.getLatestStatus();
+		if (np == null && latest != null || np != null && latest == null ||
 
-			@Override
-			public void run() {
-				try {
-					System.out.println("Display off");
-					rt.exec("/usr/sbin/mcetool -Doff");
+				!np.getInput().equals(latest.getInput())
 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}, 10000);
+				||
+
+				!np.getArtist().equals(latest.getArtist())
+
+				||
+
+				!np.getTrack().equals(latest.getTrack())
+
+		) {
+			npKeeper.setLatestStatus(np);
+			DisplayUtils.wakeupDisplay();
+
+		}
 	}
 
 }
