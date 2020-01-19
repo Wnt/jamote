@@ -10,3 +10,7 @@
   max-width: 250px;
 }
 
+
+[theme~="dark"] {
+  --lumo-base-color: black;
+}
