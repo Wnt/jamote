@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "40dfa279-f8b8-4393-bfb2-dcb299011b5e",
+		"name": "Yamaha",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Getters",
+			"item": [
+				{
+					"name": "Get Device info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/system/getDeviceInfo",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"system",
+								"getDeviceInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AvailableDevice Features",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/system/getFeatures",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"system",
+								"getFeatures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get NetworkStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/system/getNetworkStatus",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"system",
+								"getNetworkStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get FunctionStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/system/getFuncStatus",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"system",
+								"getFuncStatus"
+							]
+						},
+						"description": "e.g.: AutoPower Standby"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location infoand zone list (device)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/system/getLocationInfo",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"system",
+								"getLocationInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get zone info(device|zone)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/getStatus",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"main",
+								"getStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get SoundProgram List(device|zone)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/getSoundProgramList",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"main",
+								"getSoundProgramList"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Setters",
+			"item": [
+				{
+					"name": "Power Functions",
+					"item": [
+						{
+							"name": "Power on",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setPower?power=on",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setPower"
+									],
+									"query": [
+										{
+											"key": "power",
+											"value": "on"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Power Standby",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setPower?power=standby",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setPower"
+									],
+									"query": [
+										{
+											"key": "power",
+											"value": "standby"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Input",
+					"item": [
+						{
+							"name": "Input: Spotify",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setInput?input=spotify",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setInput"
+									],
+									"query": [
+										{
+											"key": "input",
+											"value": "spotify"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Input: Optiocal",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setInput?input=optical",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setInput"
+									],
+									"query": [
+										{
+											"key": "input",
+											"value": "optical"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Volume Commands",
+					"item": [
+						{
+							"name": "Direct Volume",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=100",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setVolume"
+									],
+									"query": [
+										{
+											"key": "volume",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incremental Up",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=up",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setVolume"
+									],
+									"query": [
+										{
+											"key": "volume",
+											"value": "up"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incremental Up in Steps",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=up&step=1",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setVolume"
+									],
+									"query": [
+										{
+											"key": "volume",
+											"value": "up"
+										},
+										{
+											"key": "step",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incremental Down",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=down",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setVolume"
+									],
+									"query": [
+										{
+											"key": "volume",
+											"value": "down"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incremental Down in Steps",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=down&step=1",
+									"protocol": "http",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"YamahaExtendedControl",
+										"v1",
+										"main",
+										"setVolume"
+									],
+									"query": [
+										{
+											"key": "volume",
+											"value": "down"
+										},
+										{
+											"key": "step",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4951068f-272a-4587-9994-4f5647104121",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2cefeb5b-2fe3-48da-a0d7-2bc98c091fdf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f9ee2aeb-fdac-4206-a091-7c73e491c357",
+			"key": "HOST",
+			"value": "10.0.0.41",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
