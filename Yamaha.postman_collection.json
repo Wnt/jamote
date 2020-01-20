@@ -9,6 +9,27 @@
 			"name": "Getters",
 			"item": [
 				{
+					"name": "Get Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/getStatus",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"main",
+								"getStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Device info",
 					"request": {
 						"method": "GET",
@@ -115,27 +136,6 @@
 					"response": []
 				},
 				{
-					"name": "Get zone info(device|zone)",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/getStatus",
-							"protocol": "http",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"YamahaExtendedControl",
-								"v1",
-								"main",
-								"getStatus"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get SoundProgram List(device|zone)",
 					"request": {
 						"method": "GET",
@@ -151,6 +151,48 @@
 								"v1",
 								"main",
 								"getSoundProgramList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CurrentPlaying info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/netusb/getPlayInfo",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"netusb",
+								"getPlayInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Preset info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}/YamahaExtendedControl/v1/netusb/getPresetInfo",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"YamahaExtendedControl",
+								"v1",
+								"netusb",
+								"getPresetInfo"
 							]
 						}
 					},
@@ -254,7 +296,7 @@
 							"response": []
 						},
 						{
-							"name": "Input: Optiocal",
+							"name": "Input: Optical",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -347,7 +389,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=up&step=1",
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=up&step=90",
 									"protocol": "http",
 									"host": [
 										"{{HOST}}"
@@ -365,7 +407,7 @@
 										},
 										{
 											"key": "step",
-											"value": "1"
+											"value": "90"
 										}
 									]
 								}
@@ -405,7 +447,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=down&step=1",
+									"raw": "http://{{HOST}}/YamahaExtendedControl/v1/main/setVolume?volume=down&step=100",
 									"protocol": "http",
 									"host": [
 										"{{HOST}}"
@@ -423,7 +465,7 @@
 										},
 										{
 											"key": "step",
-											"value": "1"
+											"value": "100"
 										}
 									]
 								}
@@ -462,7 +504,7 @@
 	],
 	"variable": [
 		{
-			"id": "f9ee2aeb-fdac-4206-a091-7c73e491c357",
+			"id": "373d393d-83ea-4bf9-839e-dbb836f79acb",
 			"key": "HOST",
 			"value": "10.0.0.41",
 			"type": "string"
