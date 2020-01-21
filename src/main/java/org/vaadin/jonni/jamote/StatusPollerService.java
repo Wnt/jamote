@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.vaadin.jonni.jamote.model.ActualVolume;
 import org.vaadin.jonni.jamote.model.PlayInfo;
@@ -36,7 +37,11 @@ public class StatusPollerService {
 
 			@Override
 			public void run() {
-				pollStatus();
+				try {
+					pollStatus();
+				} catch (RestClientException e) {
+					System.err.println("Poll failed: " + e.getMessage());
+				}
 			}
 		}, 1, 200);
 	}
@@ -48,17 +53,16 @@ public class StatusPollerService {
 
 		Status latestStatus = latestStatusKeeper.getLatestStatus();
 		if (latestStatus == null ||
-				
+
 				latestStatus.getActualVolume().getValue().compareTo(volume.getValue()) != 0
-				
+
 				||
-				
-				!latestStatus.getInput().equals(status.getInput())
-				) {
+
+				!latestStatus.getInput().equals(status.getInput())) {
 			latestStatusKeeper.setLatestStatus(status);
 			DisplayUtils.wakeupDisplay();
 		}
-		if (latestStatus!= null && latestStatus.getInput().equals("spotify")) {
+		if (latestStatus != null && latestStatus.getInput().equals("spotify")) {
 			updateNowPlaying();
 		}
 	}
